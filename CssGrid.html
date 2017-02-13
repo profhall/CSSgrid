@@ -1,0 +1,247 @@
+<!doctype html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="rangeslider.js-2.3.0/rangeslider.css">
+<style>
+	.row, .column { box-sizing: border-box;}
+	.row:before,.row:after {
+		content: "";
+		display: table;
+	}
+	.row:after {
+    clear: both ;
+	}
+	.column {
+    position: relative;
+    float: left;
+	}
+	.column + .column {
+    margin-left: 1.6%;
+	margin-top: .5%;}
+	
+	.row div:first-child {/** needed for firstcolumn in row**/
+	margin-top: .5%;}
+	
+	
+.column-1 {
+    width: 6.86666666667%;
+	background: yellow;}
+
+.column-2 {
+    width: 15.3333333333%;
+background: red;}
+
+.column-3 {
+	width: 23.8%;
+	background: orange;}
+
+.column-4 {
+    width: 32.2666666667%;
+background: green;}
+
+.column-5 {
+    width: 40.7333333333%;
+background: blue;
+}
+
+.column-6 {
+    width: 49.2%;
+background: purple;
+}
+
+.column-7 {
+    width: 57.6666666667%;
+background: #00FDE9 ;
+}
+
+.column-8 {
+    width: 66.1333333333%;
+background: #FF00C7 ;
+}
+
+.column-9 {
+    width: 74.6%;
+background: #AB9A88;
+}
+
+.column-10 {
+    width: 83.0666666667%;
+background:  #FF7577;
+}
+
+.column-11 {
+    width: 91.5333333333%;
+background: #9F95FF;
+}
+
+.column-12 {
+    width: 100%;
+	background: #00D3FF ; 
+	text-align:center;
+	}
+@media only screen and (max-width: 550px) {
+    .column-1, 
+    .column-2, 
+    .column-3, 
+    .column-4, 
+    .column-5, 
+    .column-6, 
+    .column-7, 
+    .column-8, 
+    .column-9, 
+    .column-10, 
+    .column-11, 
+    .column-12 {
+        width: auto;
+        float: none;
+    }
+
+    .column + .column {
+        margin-left: 0;
+    }
+}		
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="rangeslider.js-2.3.0/rangeslider.js"></script>
+
+
+<meta charset="UTF-8">
+<title>CSS Grids</title>
+</head>
+
+<script>
+	$( document ).ready(function() {
+    	//alert( $('#range').val() );
+		//$("#button").click(function(){
+			//alert( $('#range').val() );
+		//});
+		$( "#range" ).change(function() {
+		  //alert( $('#range').val() );
+		  $("#number").html($('#range').val());
+		  $(".column + .column").css( "margin-left", $('#range').val() +'%' );
+			margin = $('#range').val();
+			maxColumns = 12;
+			scw = getSingleColumnWidth(maxColumns,margin);
+		  $(".column-1").css( "width", scw +'%' );
+		  $(".column-2").css( "width", ColumnWidth(margin,scw,2) +'%' );
+		  $(".column-3").css( "width", ColumnWidth(margin,scw,3) +'%' );
+		  $(".column-4").css( "width", ColumnWidth(margin,scw,4) +'%' );
+		  $(".column-5").css( "width", ColumnWidth(margin,scw,5) +'%' );
+		  $(".column-6").css( "width", ColumnWidth(margin,scw,6) +'%' );
+		  $(".column-7").css( "width", ColumnWidth(margin,scw,7) +'%' );
+		  $(".column-8").css( "width", ColumnWidth(margin,scw,8) +'%' );
+		  $(".column-9").css( "width", ColumnWidth(margin,scw,9) +'%' );
+		  $(".column-10").css( "width", ColumnWidth(margin,scw,10) +'%' );
+		  $(".column-11").css( "width", ColumnWidth(margin,scw,11) +'%' );
+		  $(".column-12").css( "width", ColumnWidth(margin,scw,12) +'%' );
+			
+		  
+		});
+		// Update all rangeslider instances for all
+		// e.g. $('input[type="range"]') elements.
+		// Usefull if you changed some attributes e.g. `min` or `max` etc.
+		$('input[type="range"]').rangeslider('update', true);
+	});
+	
+	function getSideMargin(maxColumns,singleColumnWidth){
+		
+		margin = Math.abs((maxColumns*singleColumnWidth) -100)/(maxColumns-1);
+		return(margin);
+	}
+	
+	function getSingleColumnWidth(maxColumns,margin){
+		singleColumnWidth=(100 - (margin * (maxColumns-1)))/maxColumns;
+		return(singleColumnWidth);
+	}
+	
+	function ColumnWidth(margin,singleColumnWidth,columnSpan){
+		columnwidth=(singleColumnWidth*columnSpan)+(margin*(columnSpan-1))
+		return(columnwidth);
+	}
+	
+	
+	
+	
+</script>
+
+<body>
+
+<div class="row" style="height:25%;">
+  <div class="column column-12"><br>
+  <div class="row" style="height:25%;">
+  <div class="column column-3"></div>
+  <div class="column column-6">
+  <h2>Decrease or Increase The Side Margins:<input id="range" type="range" class="rangeslider rangeslider--horizontal" min="0"  max="5" step=".1" value=".5" data-orientation="vertical"><span id="number" >0</span></h2>
+  </div>
+  <div class="column column-3"></div>
+  </div>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="column column-1"><h1>  Column-1 </h1></div>
+  <div class="column column-1"><h1>  Column-1 </h1></div>
+  <div class="column column-1"><h1>  Column-1 </h1></div>
+  <div class="column column-1"><h1>  Column-1 </h1></div>
+  <div class="column column-1"><h1>  Column-1 </h1></div>
+  <div class="column column-1"><h1>  Column-1 </h1></div>
+  <div class="column column-1"><h1>  Column-1 </h1></div>
+  <div class="column column-1"><h1>  Column-1 </h1></div>
+  <div class="column column-1"><h1>  Column-1 </h1></div>
+  <div class="column column-1"><h1>  Column-1 </h1></div>
+  <div class="column column-1"><h1>  Column-1 </h1></div>
+  <div class="column column-1"><h1>  Column-1 </h1></div>
+</div>
+<div class="row">
+  <div class="column column-2"><h1>  Column-2 </h1></div>
+  <div class="column column-2"><h1>  Column-2 </h1></div>
+  <div class="column column-2"><h1>  Column-2 </h1></div>
+  <div class="column column-2"><h1>  Column-2 </h1></div>
+  <div class="column column-2"><h1>  Column-2 </h1></div>
+  <div class="column column-2"><h1>  Column-2 </h1></div>
+</div>
+<div class="row">
+  <div class="column column-3"><h1>  Column-3 </h1></div>
+  <div class="column column-3"><h1>  Column-3 </h1></div>
+  <div class="column column-3"><h1>  Column-3 </h1></div>
+  <div class="column column-3"><h1>  Column-3 </h1></div>
+</div>
+<div class="row">
+  <div class="column column-4"><h1>  Column-4 </h1></div>
+  <div class="column column-4"><h1>  Column-4 </h1></div>
+  <div class="column column-4"><h1>  Column-4 </h1></div>
+</div>
+<div class="row">
+  <div class="column column-5"><h1>  Column-5 </h1></div>
+  <div class="column column-2"><h1>  Column-2 </h1></div>
+  <div class="column column-5"><h1>  Column-5 </h1></div>
+</div>
+<div class="row">
+  <div class="column column-6"><h1>  Column-6 </h1></div>
+  <div class="column column-6"><h1>  Column-6 </h1></div>
+</div>
+<div class="row">
+  <div class="column column-7"><h1>  Column-7 </h1></div>
+  <div class="column column-3"><h1>  Column-3 </h1></div>
+  <div class="column column-2"><h1>  Column-2 </h1></div>
+</div>
+<div class="row">
+  <div class="column column-8"><h1>  Column-8 </h1></div>
+  <div class="column column-4"><h1>  Column-4 </h1></div>
+</div>
+<div class="row">
+  <div class="column column-9"><h1>  Column-9 </h1></div>
+  <div class="column column-3"><h1>  Column-3 </h1></div>
+</div>
+<div class="row">
+  <div class="column column-1"><h1>  Column-1 </h1></div>
+  <div class="column column-10"><h1>  Column-10 </h1></div>
+  <div class="column column-1"><h1>  Column-1 </h1></div>
+</div>
+<div class="row">
+  <div class="column column-1"><h1>  Column-1 </h1></div>
+  <div class="column column-11"><h1>  Column-11 </h1></div>
+</div>
+</body>
+</html>
